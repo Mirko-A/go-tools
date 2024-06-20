@@ -3,6 +3,7 @@ package io
 import (
 	"io"
 	"os"
+	"strings"
 )
 
 func ReadToString(filePath string) (string, error) {
@@ -16,4 +17,22 @@ func ReadToString(filePath string) (string, error) {
 	}
 
 	return string(content), nil
+}
+
+func ReadLines(filePath string) ([]string, error) {
+	s, err := ReadToString(filePath)
+	if err != nil {
+		return nil, err
+	}
+
+	return strings.Split(s, "\n"), nil
+}
+
+func ReadLinesCRLF(filePath string) ([]string, error) {
+	s, err := ReadToString(filePath)
+	if err != nil {
+		return nil, err
+	}
+
+	return strings.Split(s, "\r\n"), nil
 }
